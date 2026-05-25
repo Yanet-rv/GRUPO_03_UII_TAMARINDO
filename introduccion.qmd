@@ -1,0 +1,16 @@
+---
+title: "Introducción"
+format: html
+---
+
+El Tamarindo (Tamarindus indica) es una planta originaria de la zona tropical del África, cuyo cultivo se ha extendido en partes de Asia y Sudamérica para usos culinarios y medicinales debido al alto contenido  de ácidos orgánicos como el tartárico  (usado como acidulante, conservante y antioxidante) en la pulpa (Zhidong et al., 2026). Las semillas molidas de Tamarindo están consideradas como un buen adsorbente en la eliminación de colorantes de agua, turbidez y demanda de oxígeno, convirtiéndose en una alternativa ecológica frente a los procesos químicos o térmicos que se caracterizan por su complejidad (Hashem et al., 2025) (Kurniawan et al., 2025)
+Las semillas de Tamarindo presentan una cubierta o pericarpio más duro en comparación del resto de leguminosas, lo que les confiere una mayor dificultad para el ingreso de agua y producir la imbibición por parte de la semilla y así poder romper su dormancia. De manera natural presentan un aproximado del 40% en tasa de germinación, por lo que la implementación de tratamientos externos ayudan a elevar el porcentaje de germinación de las semillas. Estudios realizados señalan que, se puede lograr una germinación promedio de un 70% cuando son sometidas a un baño en agua caliente  y luego a remojo en agua fría o tibia durante 24 a 48 horas; en siembra  directa y humedad o riego constante se logra después de los 10 días (Parrotta., 1990). Ante lo descrito el uso de métodos de escarificación para esta semilla son necesarias ya que ayudarán a elevar la tasa de germinación, pues han demostrado ser muy eficaces cuando se han evaluado semillas de testa muy compacta o dura como de lufa lisa que cuando fueron sometidas a métodos de escarificación (corte de semilla, escarificador mecánico de diversas velocidades y tratamiento de calor a T° de 60, 70 y 80 °C durante 1 a 5 horas) se logró obtener hasta 100% de germinación (corte), 80% (calor) y 75% escarificador mecánico (Chaodumrikul et al., 2016)
+En el presente trabajo se ha evaluado
+
+## Objetivos
+ 
+Parrafo 3. Mediante el desarrollo del siguiente trabajo se han considerado tres objetivos.
+Objetivo 1. Evaluar el efecto de los tres métodos de escarificación sobre la germinación de semillas de tamarindo (Tamarindus indica) con dormancia física
+Objetivo 2. Identificar el método más eficiente para romper la dormancia en tamarindo (Tamarindus indica). 
+Objetivo 3. Evaluar la latencia de la semillas de Tamarindo (Tamarindus indica), mediante tres métodos de escarificación.
+O Comparar la longitud de la radícula en plántulas de Tamarindus indica obtenidas mediante tres métodos de escarificación.

@@ -1,0 +1,24 @@
+---
+title: "Materiales y Métodos"
+format: html
+---
+
+## Materiales 
+ 
+### Material vegetal
+Las semillas utilizadas corresponden a frutos de tamarindo seleccionados por su buen estado de madurez y apariencia saludable. Estas fueron adquiridas en el Mercado Modelo de la ciudad de Chachapoyas, región Amazonas. Posteriormente, se realizó una selección manual de las semillas, descartando aquellas que presentaban daños físicos, manchas, perforaciones, signos de deterioro o impurezas. Solo se consideraron las semillas con mayor integridad física, uniformidad y apariencia vigorosa para su utilización en el proceso experimental. 
+
+##  Métodos
+ 
+2.2.1. Elaboración de libro de campo
+
+Mediante la plataforma interactiva Tarpuy, desde el entorno de R, se elaboró el libro de campo para la planificación y organización del experimento en semillas de tamarindo, el cual estuvo constituido por cuatro tratamientos (un testigo y tres métodos de escarificación), con cuatro repeticiones y 25 unidades experimentales por tratamiento. La información experimental fue sistematizada en una hoja de cálculo de Google Sheets e importada a R mediante el paquete googlesheets4 para su procesamiento y gestión. Asimismo, las etiquetas de identificación fueron generadas con el paquete huito de R, incorporando información de los tratamientos e imágenes referenciales, como el logotipo institucional, permitiendo una identificación estandarizada y el adecuado seguimiento de las unidades experimentales durante la fase de germinación.
+
+2.2.2. Elaboración de etiquetas
+Selección y limpieza de semillas. 
+Aplicación de tratamientos pregerminativos. 
+Colocación de semillas sobre papel toalla húmedo y/o recipientes 
+Incubación en condiciones controladas.
+ Registro diario de germinación. 
+Evaluación de variables fisiológicas. 
+Variables: Porcentaje de germinación, Tiempo medio de germinación, Velocidad de emergencia-Uniformidad germinativa y longitud de radicula
