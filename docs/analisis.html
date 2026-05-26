@@ -110,6 +110,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -290,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> <i class="bi bi-house-door-fill" role="img">
 </i> 
-<span class="menu-text">.</span></a>
+<span class="menu-text">index</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./introduccion.html"> 
@@ -340,8 +369,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto">Quarto</a></li>
-  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code">Running Code</a></li>
+  <li><a href="#project-setup" id="toc-project-setup" class="nav-link active" data-scroll-target="#project-setup">Project Setup</a></li>
+  <li><a href="#cargar-librerias" id="toc-cargar-librerias" class="nav-link" data-scroll-target="#cargar-librerias">Cargar librerias</a></li>
+  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import">Data import</a></li>
+  <li><a href="#índices-de-germinación" id="toc-índices-de-germinación" class="nav-link" data-scroll-target="#índices-de-germinación">ÍNDICES DE GERMINACIÓN</a>
+  <ul class="collapse">
+  <li><a href="#semillas-germinadas-grs" id="toc-semillas-germinadas-grs" class="nav-link" data-scroll-target="#semillas-germinadas-grs">Semillas germinadas (grs)</a></li>
+  </ul></li>
+  <li><a href="#comparación-de-medias" id="toc-comparación-de-medias" class="nav-link" data-scroll-target="#comparación-de-medias">Comparación de medias</a></li>
+  <li><a href="#letras-de-significancia" id="toc-letras-de-significancia" class="nav-link" data-scroll-target="#letras-de-significancia">Letras de significancia</a></li>
+  <li><a href="#representación-grafica" id="toc-representación-grafica" class="nav-link" data-scroll-target="#representación-grafica">Representación grafica</a>
+  <ul class="collapse">
+  <li><a href="#tiempo-medio-de-germinación" id="toc-tiempo-medio-de-germinación" class="nav-link" data-scroll-target="#tiempo-medio-de-germinación">Tiempo medio de germinación</a></li>
+  <li><a href="#índice-de-sincronización" id="toc-índice-de-sincronización" class="nav-link" data-scroll-target="#índice-de-sincronización">Índice de sincronización</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -368,28 +409,721 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="project-setup" class="level1">
+<h1>Project Setup</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'https://inkaverse.com/setup.r'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'car':
+  method           from
+  na.action.merMod lme4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ The googlesheets4 package is using a cached token for
+  '7189053722@untrm.edu.pe'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ The googledrive package is using a cached token for
+  '7189053722@untrm.edu.pe'.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Project directory:  D:/AGRONOMIA/IX CICLO 2026-I/SEMILLAS/GRUPO_03_UII_TAMARINDO 
+CPU cores detected:  12 
+CPU cores in use:  9 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in system2("quarto", "-V", stdout = TRUE, env = paste0("TMPDIR=", : el
+comando ejecutado '"quarto"
+TMPDIR=C:/Users/DELL/AppData/Local/Temp/RtmpmIu7HA/file7410f6014f5 -V' tiene el
+estatus 1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.5.3 Patched (2026-03-11 r89754 ucrt)
+ os       Windows 11 x64 (build 26200)
+ system   x86_64, mingw32
+ ui       RTerm
+ language (EN)
+ collate  Spanish_Peru.utf8
+ ctype    Spanish_Peru.utf8
+ tz       America/Lima
+ date     2026-05-26
+ pandoc   3.8.3 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
+ quarto   NA @ C:\\PROGRA~1\\RStudio\\resources\\app\\bin\\quarto\\bin\\quarto.exe
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package       * version   date (UTC) lib source
+ abind           1.4-8     2024-09-12 [1] CRAN (R 4.5.0)
+ agricolae       1.3-7     2023-10-22 [1] CRAN (R 4.5.1)
+ AlgDesign       1.2.1.2   2025-04-06 [1] CRAN (R 4.5.0)
+ askpass         1.2.1     2024-10-04 [1] CRAN (R 4.5.1)
+ boot            1.3-32    2025-08-29 [2] CRAN (R 4.5.3)
+ cachem          1.1.0     2024-05-16 [1] CRAN (R 4.5.1)
+ car           * 3.1-5     2026-02-03 [1] CRAN (R 4.5.3)
+ carData       * 3.0-6     2026-01-30 [1] CRAN (R 4.5.3)
+ cellranger      1.1.0     2016-07-27 [1] CRAN (R 4.5.1)
+ cli             3.6.5     2025-04-23 [1] CRAN (R 4.5.1)
+ cluster         2.1.8.2   2026-02-05 [2] CRAN (R 4.5.3)
+ codetools       0.2-20    2024-03-31 [2] CRAN (R 4.5.3)
+ coro            1.1.0     2024-11-05 [1] CRAN (R 4.5.1)
+ cowplot       * 1.2.0     2025-07-07 [1] CRAN (R 4.5.1)
+ curl            7.1.0     2026-04-22 [1] CRAN (R 4.5.3)
+ devtools      * 2.5.2     2026-04-30 [1] CRAN (R 4.5.3)
+ digest          0.6.39    2025-11-19 [1] CRAN (R 4.5.3)
+ dplyr         * 1.2.1     2026-04-03 [1] CRAN (R 4.5.3)
+ DT              0.34.0    2025-09-02 [1] CRAN (R 4.5.1)
+ ellipsis        0.3.3     2026-04-04 [1] CRAN (R 4.5.3)
+ ellmer          0.4.1     2026-05-07 [1] CRAN (R 4.5.3)
+ emmeans       * 2.0.3     2026-04-09 [1] CRAN (R 4.5.3)
+ estimability    1.5.1     2024-05-12 [1] CRAN (R 4.5.1)
+ evaluate        1.0.5     2025-08-27 [1] CRAN (R 4.5.1)
+ FactoMineR    * 2.14      2026-04-08 [1] CRAN (R 4.5.3)
+ farver          2.1.2     2024-05-13 [1] CRAN (R 4.5.1)
+ fastmap         1.2.0     2024-05-15 [1] CRAN (R 4.5.1)
+ flashClust      1.1-4     2026-03-03 [1] CRAN (R 4.5.2)
+ forcats       * 1.0.1     2025-09-25 [1] CRAN (R 4.5.1)
+ Formula         1.2-5     2023-02-24 [1] CRAN (R 4.5.0)
+ fs              2.1.0     2026-04-18 [1] CRAN (R 4.5.3)
+ gargle          1.6.1     2026-01-29 [1] CRAN (R 4.5.3)
+ generics        0.1.4     2025-05-09 [1] CRAN (R 4.5.1)
+ ggplot2       * 4.0.3     2026-04-22 [1] CRAN (R 4.5.3)
+ ggrepel         0.9.8     2026-03-17 [1] CRAN (R 4.5.3)
+ glue            1.8.0     2024-09-30 [1] CRAN (R 4.5.1)
+ googledrive   * 2.1.2     2025-09-10 [1] CRAN (R 4.5.1)
+ googlesheets4 * 1.1.2     2025-09-03 [1] CRAN (R 4.5.2)
+ gtable          0.3.6     2024-10-25 [1] CRAN (R 4.5.1)
+ hms             1.1.4     2025-10-17 [1] CRAN (R 4.5.1)
+ htmltools       0.5.9     2025-12-04 [1] CRAN (R 4.5.3)
+ htmlwidgets     1.6.4     2023-12-06 [1] CRAN (R 4.5.1)
+ httpuv          1.6.17    2026-03-18 [1] CRAN (R 4.5.3)
+ httr            1.4.8     2026-02-13 [1] CRAN (R 4.5.3)
+ httr2           1.2.2     2025-12-08 [1] CRAN (R 4.5.3)
+ huito         * 0.2.6     2025-10-18 [1] CRAN (R 4.5.2)
+ inti          * 0.6.92    2026-03-23 [1] CRAN (R 4.5.3)
+ jsonlite        2.0.0     2025-03-27 [1] CRAN (R 4.5.1)
+ knitr         * 1.51      2025-12-20 [1] CRAN (R 4.5.3)
+ later           1.4.8     2026-03-05 [1] CRAN (R 4.5.3)
+ lattice         0.22-9    2026-02-09 [2] CRAN (R 4.5.3)
+ leaps           3.2       2024-06-10 [1] CRAN (R 4.5.1)
+ lifecycle       1.0.5     2026-01-08 [1] CRAN (R 4.5.3)
+ lme4          * 2.0-1     2026-03-05 [1] CRAN (R 4.5.2)
+ lubridate     * 1.9.5     2026-02-04 [1] CRAN (R 4.5.3)
+ magick        * 2.9.1     2026-02-28 [1] CRAN (R 4.5.3)
+ magrittr        2.0.3     2022-03-30 [1] CRAN (R 4.5.1)
+ MASS          * 7.3-65    2025-02-28 [2] CRAN (R 4.5.3)
+ Matrix        * 1.7-5     2026-03-21 [1] CRAN (R 4.5.3)
+ memoise         2.0.1     2021-11-26 [1] CRAN (R 4.5.1)
+ mime            0.13      2025-03-17 [1] CRAN (R 4.5.0)
+ minqa           1.2.8     2024-08-17 [1] CRAN (R 4.5.1)
+ mnormt          2.1.2     2026-01-27 [1] CRAN (R 4.5.2)
+ multcomp      * 1.4-30    2026-03-09 [1] CRAN (R 4.5.3)
+ multcompView    0.1-11    2026-02-16 [1] CRAN (R 4.5.3)
+ mvtnorm       * 1.3-7     2026-04-15 [1] CRAN (R 4.5.3)
+ nlme            3.1-169   2026-03-27 [1] CRAN (R 4.5.3)
+ nloptr          2.2.1     2025-03-17 [1] CRAN (R 4.5.1)
+ openssl         2.4.1     2026-05-14 [1] CRAN (R 4.5.3)
+ otel            0.2.0     2025-08-29 [1] CRAN (R 4.5.1)
+ pillar          1.11.1    2025-09-17 [1] CRAN (R 4.5.1)
+ pkgbuild        1.4.8     2025-05-26 [1] CRAN (R 4.5.1)
+ pkgconfig       2.0.3     2019-09-22 [1] CRAN (R 4.5.1)
+ pkgload         1.5.2     2026-04-22 [1] CRAN (R 4.5.3)
+ promises        1.5.0     2025-11-01 [1] CRAN (R 4.5.3)
+ psych         * 2.6.5     2026-05-16 [1] CRAN (R 4.5.3)
+ purrr         * 1.2.2     2026-04-10 [1] CRAN (R 4.5.3)
+ R6              2.6.1     2025-02-15 [1] CRAN (R 4.5.1)
+ rappdirs        0.3.3     2021-01-31 [1] CRAN (R 4.5.1)
+ rbibutils       2.4.1     2026-01-21 [1] CRAN (R 4.5.3)
+ RColorBrewer    1.1-3     2022-04-03 [1] CRAN (R 4.5.0)
+ Rcpp            1.1.1-1.1 2026-04-24 [1] CRAN (R 4.5.3)
+ Rdpack          2.6.6     2026-02-08 [1] CRAN (R 4.5.3)
+ readr         * 2.2.0     2026-02-19 [1] CRAN (R 4.5.3)
+ reformulas      0.4.4     2026-02-02 [1] CRAN (R 4.5.3)
+ RhpcBLASctl   * 0.23-42   2023-02-11 [1] CRAN (R 4.5.2)
+ rlang           1.2.0     2026-04-06 [1] CRAN (R 4.5.3)
+ rmarkdown       2.31      2026-03-26 [1] CRAN (R 4.5.3)
+ rstudioapi      0.18.0    2026-01-16 [1] CRAN (R 4.5.3)
+ S7              0.2.0     2024-11-07 [1] CRAN (R 4.5.1)
+ sandwich        3.1-1     2024-09-15 [1] CRAN (R 4.5.1)
+ scales          1.4.0     2025-04-24 [1] CRAN (R 4.5.1)
+ scatterplot3d   0.3-45    2026-02-23 [1] CRAN (R 4.5.2)
+ sessioninfo   * 1.2.3     2025-02-05 [1] CRAN (R 4.5.1)
+ shiny         * 1.13.0    2026-02-20 [1] CRAN (R 4.5.3)
+ showtext        0.9-8     2026-03-21 [1] CRAN (R 4.5.3)
+ showtextdb      3.0       2020-06-04 [1] CRAN (R 4.5.2)
+ stringi         1.8.7     2025-03-27 [1] CRAN (R 4.5.0)
+ stringr       * 1.6.0     2025-11-04 [1] CRAN (R 4.5.3)
+ survival      * 3.8-6     2026-01-16 [2] CRAN (R 4.5.3)
+ sysfonts        0.8.9     2024-03-02 [1] CRAN (R 4.5.2)
+ TH.data       * 1.1-5     2025-11-17 [1] CRAN (R 4.5.3)
+ tibble        * 3.3.1     2026-01-11 [1] CRAN (R 4.5.3)
+ tidyr         * 1.3.2     2025-12-19 [1] CRAN (R 4.5.3)
+ tidyselect      1.2.1     2024-03-11 [1] CRAN (R 4.5.1)
+ tidyverse     * 2.0.0     2023-02-22 [1] CRAN (R 4.5.1)
+ timechange      0.4.0     2026-01-29 [1] CRAN (R 4.5.3)
+ tzdb            0.5.0     2025-03-15 [1] CRAN (R 4.5.1)
+ usethis       * 3.2.1     2025-09-06 [1] CRAN (R 4.5.3)
+ vctrs           0.7.3     2026-04-11 [1] CRAN (R 4.5.3)
+ withr           3.0.2     2024-10-28 [1] CRAN (R 4.5.1)
+ xfun            0.57      2026-03-20 [1] CRAN (R 4.5.3)
+ xtable          1.8-8     2026-02-22 [1] CRAN (R 4.5.3)
+ yaml            2.3.12    2025-12-10 [1] CRAN (R 4.5.3)
+ zoo             1.8-15    2025-12-15 [1] CRAN (R 4.5.3)
+
+ [1] C:/Users/DELL/AppData/Local/R/win-library/4.5
+ [2] C:/Program Files/R/R-4.5.3patched/library
+ * ── Packages attached to the search path.
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+<p>Factor : Escarificacion</p>
+<p><em>Variables</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Abreviatura</th>
+<th>Unidades</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Semillas germinadas</em></td>
+<td>grs</td>
+<td>conteo</td>
+</tr>
+<tr class="even">
+<td><em>Germinabilidad</em></td>
+<td>grp</td>
+<td>%</td>
+</tr>
+<tr class="odd">
+<td><em>Tiempo medio de germinación</em></td>
+<td>mgt</td>
+<td>tiempo</td>
+</tr>
+<tr class="even">
+<td><em>Índice de sincronización</em></td>
+<td>syn</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<section id="cargar-librerias" class="level1">
+<h1>Cargar librerias</h1>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GerminaR)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="data-import" class="level1">
+<h1>Data import</h1>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gs <span class="ot">&lt;-</span> <span class="st">"https://docs.google.com/spreadsheets/d/1DxRhmFtBscdZkNRlOHaP2ZLf2yYz6IKwg1cF9elXY84/edit?gid=1390923633#gid=1390923633"</span> <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_sheets_id</span>()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>fb <span class="ot">&lt;-</span> gs <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">range_read</span>(<span class="at">ss =</span> .,<span class="at">sheet =</span> <span class="st">"fb"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="índices-de-germinación" class="level1">
+<h1>ÍNDICES DE GERMINACIÓN</h1>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gsm <span class="ot">&lt;-</span> <span class="fu">ger_summary</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">factors =</span> <span class="fu">c</span>(<span class="st">"rows"</span>, <span class="st">"Escarificacion"</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">SeedN =</span> <span class="st">"seeds"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">evalName =</span> <span class="st">"ger_"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cumulative =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> fb</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>gsm <span class="sc">%&gt;%</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">round</span>(., <span class="dv">2</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Índices de germinación"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Índices de germinación</caption>
+<colgroup>
+<col style="width: 29%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">qrcode</th>
+<th style="text-align: right;">plots</th>
+<th style="text-align: right;">ntreat</th>
+<th style="text-align: left;">Escarificacion</th>
+<th style="text-align: right;">sort</th>
+<th style="text-align: right;">rep</th>
+<th style="text-align: left;">rows</th>
+<th style="text-align: right;">cols</th>
+<th style="text-align: right;">seeds</th>
+<th style="text-align: right;">grs</th>
+<th style="text-align: right;">grp</th>
+<th style="text-align: right;">mgt</th>
+<th style="text-align: right;">mgr</th>
+<th style="text-align: right;">gsp</th>
+<th style="text-align: right;">unc</th>
+<th style="text-align: right;">syn</th>
+<th style="text-align: right;">vgt</th>
+<th style="text-align: right;">sdg</th>
+<th style="text-align: right;">cvg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1001_Lija</td>
+<td style="text-align: right;">1001</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Lija</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">7.90</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">12.65</td>
+<td style="text-align: right;">2.31</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">2.69</td>
+<td style="text-align: right;">1.64</td>
+<td style="text-align: right;">20.75</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1002_Lija</td>
+<td style="text-align: right;">1002</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Lija</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">8.67</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">11.54</td>
+<td style="text-align: right;">1.46</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">9.42</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1003_Sin_tratamiento</td>
+<td style="text-align: right;">1003</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Sin_tratamiento</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">9.60</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">10.42</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.40</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">5.71</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1004_Lija</td>
+<td style="text-align: right;">1004</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Lija</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">9.91</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">10.09</td>
+<td style="text-align: right;">1.57</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">8.56</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1005_Lija</td>
+<td style="text-align: right;">1005</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Lija</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">9.12</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">10.96</td>
+<td style="text-align: right;">2.54</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">2.94</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">18.81</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1006_Agua_caliente</td>
+<td style="text-align: right;">1006</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Agua_caliente</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">8.33</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">12.00</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">1.33</td>
+<td style="text-align: right;">1.15</td>
+<td style="text-align: right;">13.86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1007_Bisturí</td>
+<td style="text-align: right;">1007</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Bisturí</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">7.88</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">12.69</td>
+<td style="text-align: right;">1.68</td>
+<td style="text-align: right;">0.36</td>
+<td style="text-align: right;">1.28</td>
+<td style="text-align: right;">1.13</td>
+<td style="text-align: right;">14.34</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1008_Sin_tratamiento</td>
+<td style="text-align: right;">1008</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Sin_tratamiento</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1009_Sin_tratamiento</td>
+<td style="text-align: right;">1009</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Sin_tratamiento</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">11.00</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">9.09</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CHACHAPOYAS_2026-05-12_1010_Bisturí</td>
+<td style="text-align: right;">1010</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Bisturí</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">10.50</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">9.52</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: right;">6.73</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<p>You can add options to executable code like this</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<section id="semillas-germinadas-grs" class="level2">
+<h2 class="anchored" data-anchor-id="semillas-germinadas-grs">Semillas germinadas (grs)</h2>
+<ul>
+<li>Modelo</li>
+</ul>
+<p><span class="math display">\[ grs = \mu + block + escarificacion + e\]</span></p>
+<p>-ANOVA</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  grs <span class="sc">~</span> Escarificacion <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>rows),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> gsm</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(md)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">##                npar Sum Sq Mean Sq F value</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Escarificacion    3 849.69  283.23  5.2837</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(md)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Deviance Table (Type II Wald chisquare tests)</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Response: grs</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Chisq Df Pr(&gt;Chisq)   </span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Escarificacion 15.851  3   0.001217 **</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(md)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Linear mixed model fit by REML ['lmerMod']</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula: grs ~ Escarificacion + (1 | rows)</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="do">##    Data: gsm</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="do">## REML criterion at convergence: 87.4</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Scaled residuals: </span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.84389 -0.20488  0.03415  0.42683  1.29755 </span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Random effects:</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  Groups   Name        Variance Std.Dev.</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  rows     (Intercept)  0.0     0.000   </span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  Residual             53.6     7.321   </span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of obs: 16, groups:  rows, 4</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Fixed effects:</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="do">##                               Estimate Std. Error t value</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)                      3.250      3.661   0.888</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="do">## EscarificacionBisturí           12.250      5.177   2.366</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="do">## EscarificacionLija              15.500      5.177   2.994</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="do">## EscarificacionSin_tratamiento   -1.000      5.177  -0.193</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="do">## Correlation of Fixed Effects:</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="do">##             (Intr) EscrfB EscrfL</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="do">## EscrfccnBst -0.707              </span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="do">## EscarfccnLj -0.707  0.500       </span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="do">## EscrfccnSn_ -0.707  0.500  0.500</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="do">## optimizer (nloptwrap) convergence code: 0 (OK)</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="do">## boundary (singular) fit: see help('isSingular')</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="comparación-de-medias" class="level1">
+<h1>Comparación de medias</h1>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(md, <span class="sc">~</span> Escarificacion)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm, <span class="at">adjust =</span> <span class="st">"tukey"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  contrast                        estimate   SE    df t.ratio p.value</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  Agua_caliente - Bisturí           -12.25 5.54 10.55  -2.210  0.1826</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  Agua_caliente - Lija              -15.50 6.34  8.39  -2.446  0.1415</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  Agua_caliente - Sin_tratamiento     1.00 5.40 10.55   0.185  0.9976</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  Bisturí - Lija                     -3.25 6.34  8.39  -0.513  0.9538</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  Bisturí - Sin_tratamiento          13.25 5.40 10.55   2.454  0.1259</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  Lija - Sin_tratamiento             16.50 5.68 11.99   2.903  0.0560</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Degrees-of-freedom method: kenward-roger </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## P value adjustment: tukey method for comparing a family of 4 estimates</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="letras-de-significancia" class="level1">
+<h1>Letras de significancia</h1>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>letras <span class="ot">&lt;-</span> <span class="fu">cld</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  emm,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjust =</span> <span class="st">"tukey"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Letters =</span> letters</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>letras</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  Escarificacion  emmean   SE    df lower.CL upper.CL .group</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  Sin_tratamiento   2.25 3.66 11.76    -8.49     13.0  a    </span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  Agua_caliente     3.25 3.97  9.72    -8.84     15.3  a    </span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  Bisturí          15.50 3.97  9.72     3.41     27.6  a    </span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  Lija             18.75 4.35  5.07     2.37     35.1  a    </span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Degrees-of-freedom method: kenward-roger </span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Confidence level used: 0.95 </span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Conf-level adjustment: sidak method for 4 estimates </span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="do">## P value adjustment: tukey method for comparing a family of 4 estimates </span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="do">## significance level used: alpha = 0.05 </span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span><span class="al">NOTE</span><span class="do">: If two or more means share the same grouping symbol,</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="do">##       then we cannot show them to be different.</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="do">##       But we also did not show them to be the same.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="representación-grafica" class="level1">
+<h1>Representación grafica</h1>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>letras_df <span class="ot">&lt;-</span> letras <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Escarificacion =</span> <span class="fu">factor</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>      Escarificacion,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">unique</span>(gsm<span class="sc">$</span>Escarificacion)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">.group =</span> <span class="fu">trimws</span>(.group)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_smr</span>(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  letras_df,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">"Escarificacion"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"emmean"</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">error =</span> <span class="st">"SE"</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig =</span> <span class="st">".group"</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Germinación (grp) de semillas de tamarindo"</span>) <span class="sc">+</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="fl">0.5</span>,   <span class="co"># centra el título</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">face =</span> <span class="st">"bold"</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="dv">16</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="analisis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:98.0%"></p>
+</figure>
 </div>
 </div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+</div>
+<section id="tiempo-medio-de-germinación" class="level2">
+<h2 class="anchored" data-anchor-id="tiempo-medio-de-germinación">Tiempo medio de germinación</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>gsm <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Escarificacion) <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mgt =</span> <span class="fu">mean</span>(mgt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_mgt =</span> <span class="fu">sd</span>(mgt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">se_mgt =</span> sd_mgt <span class="sc">/</span> <span class="fu">sqrt</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Escarificacion, <span class="at">y =</span> mean_mgt, <span class="at">fill =</span> Escarificacion)) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_mgt <span class="sc">-</span> se_mgt, <span class="at">ymax =</span> mean_mgt <span class="sc">+</span> se_mgt), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> (<span class="st">"Tiempo Medio de Germinación en semillas de Tamarindo"</span>),</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Tiempo Medio de Germinación (mgt)"</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Tratamiento"</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Tratamiento"</span>) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="analisis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:98.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="índice-de-sincronización" class="level2">
+<h2 class="anchored" data-anchor-id="índice-de-sincronización">Índice de sincronización</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>gsm <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Escarificacion) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_syn =</span> <span class="fu">mean</span>(syn, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_syn =</span> <span class="fu">sd</span>(syn, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">se_syn =</span> sd_syn <span class="sc">/</span> <span class="fu">sqrt</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Escarificacion, <span class="at">y =</span> mean_syn, <span class="at">fill =</span> Escarificacion)) <span class="sc">+</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_syn <span class="sc">-</span> se_syn, <span class="at">ymax =</span> mean_syn <span class="sc">+</span> se_syn), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span>       (<span class="st">"Índice de Sincronización (syn)"</span>),</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Índice de Sincronización"</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Tratamiento"</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Tratamiento"</span>) <span class="sc">+</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="analisis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:98.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

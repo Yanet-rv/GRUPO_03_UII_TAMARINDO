@@ -11,38 +11,214 @@ format: html
 source('https://inkaverse.com/setup.r')
 ```
 
-# Data import
+Factor : Escarificacion
 
-```{r}
-gs <- "https://docs.google.com/spreadsheets/d/1DxRhmFtBscdZkNRlOHaP2ZLf2yYz6IKwg1cF9elXY84/edit?gid=1287248048#gid=1287248048" %>% 
-  as_sheets_id()
+*Variables*
 
-fb1 <- gs %>% 
-  range_read(ss = .,sheet = "fb1")
-```
+| Variable                      | Abreviatura | Unidades | 
+|-------------------------------|-------------|----------|
+| *Semillas germinadas*         | grs         | conteo   | 
+| *Germinabilidad*              | grp         | \%       | 
+| *Tiempo medio de germinación* | mgt         | tiempo   | 
+| *Índice de sincronización*    | syn         | —        | 
 
-# Research Objectives
-
-Calcula los índices de germinación y realiza las pruebas ANOVA y de comparación de medias.
-
-
-# Modelo estadistico
-
-Diseño en Bloques Completamente al Azar (DBCA)
-
-$$ Yij = u + escarificacion + bloque + Eij$$
-
-# Anova
+# Cargar librerias
 
 ```{r}
 library(GerminaR)
 library(tidyverse)
-library(rstatix)
+library(googlesheets4)
+library(knitr)
+library(ggplot2)
+```
 
-fb %>%
-  mutate(
-    total_germination = rowSums(select(., starts_with("ger_"))),
-    germination_index = (total_germination / seeds) * 100
-  )
+# Data import
+
+```{r}
+gs <- "https://docs.google.com/spreadsheets/d/1DxRhmFtBscdZkNRlOHaP2ZLf2yYz6IKwg1cF9elXY84/edit?gid=1390923633#gid=1390923633" %>% 
+  as_sheets_id()
+
+fb <- gs %>% 
+  range_read(ss = .,sheet = "fb")
+```
+
+
+# ÍNDICES DE GERMINACIÓN
+
+```{r}
+gsm <- ger_summary(
+  factors = c("rows", "Escarificacion"),
+  SeedN = "seeds",
+  evalName = "ger_",
+  cumulative = TRUE,
+  data = fb
+)
+gsm %>% 
+  head(10) %>% 
+  mutate(across(where(is.numeric), ~round(., 2))) %>% 
+  kable(caption = "Índices de germinación")
+```
+
+## Semillas germinadas (grs)
+
+- Modelo
+
+$$ grs = \mu + block + escarificacion + e$$
+
+-ANOVA
+
+
+```{r}
+library(lme4)
+
+md <- lmer(
+  grs ~ Escarificacion + (1|rows),
+  data = gsm
+)
+anova(md)
+library(car)
+Anova(md)
+summary(md)
+```
+
+# Comparación de medias
+
+```{r}
+library(emmeans)
+
+emm <- emmeans(md, ~ Escarificacion)
+
+pairs(emm, adjust = "tukey")
+```
+
+
+# Letras de significancia
+
+```{r}
+library(multcomp)
+
+letras <- cld(
+  emm,
+  adjust = "tukey",
+  Letters = letters
+)
+
+letras
 
 ```
+
+# Representación grafica
+
+```{r}
+library(dplyr)
+
+letras_df <- letras %>%
+  as.data.frame() %>%
+  mutate(
+    Escarificacion = factor(
+      Escarificacion,
+      levels = unique(gsm$Escarificacion)
+    ),
+    .group = trimws(.group)
+  )
+plot_smr(
+  letras_df,
+  x = "Escarificacion",
+  y = "emmean",
+  error = "SE",
+  sig = ".group"
+) +
+  ggtitle("Germinación (grp) de semillas de tamarindo") +
+  
+  theme(
+    plot.title = element_text(
+      hjust = 0.5,   # centra el título
+      face = "bold",
+      size = 16
+    )
+  ) +
+  
+  scale_y_continuous(
+    breaks = seq(0, 100, by = 2)
+  )
+```
+
+
+## Tiempo medio de germinación 
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+gsm %>%
+  group_by(Escarificacion) %>%
+  summarise(
+    mean_mgt = mean(mgt, na.rm = TRUE),
+    sd_mgt = sd(mgt, na.rm = TRUE),
+    n = n()
+  ) %>%
+  mutate(se_mgt = sd_mgt / sqrt(n)) %>%
+  ggplot(aes(x = Escarificacion, y = mean_mgt, fill = Escarificacion)) +
+  geom_col(position = "dodge", width = 0.5) +
+  geom_errorbar(aes(ymin = mean_mgt - se_mgt, ymax = mean_mgt + se_mgt), width = 0.2, color = "black") +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = ("Tiempo Medio de Germinación en semillas de Tamarindo"),
+       y = "Tiempo Medio de Germinación (mgt)",
+       x = "Tratamiento",
+       fill = "Tratamiento") +
+  theme_bw()
+```
+
+
+## Índice de sincronización 
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+gsm %>%
+  group_by(Escarificacion) %>%
+  summarise(
+    mean_syn = mean(syn, na.rm = TRUE),
+    sd_syn = sd(syn, na.rm = TRUE),
+    n = n()
+  ) %>%
+  mutate(se_syn = sd_syn / sqrt(n)) %>%
+  ggplot(aes(x = Escarificacion, y = mean_syn, fill = Escarificacion)) +
+  geom_col(position = "dodge", width = 0.5) +
+  geom_errorbar(aes(ymin = mean_syn - se_syn, ymax = mean_syn + se_syn), width = 0.2, color = "black") +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title =       ("Índice de Sincronización (syn)"),
+       y = "Índice de Sincronización",
+       x = "Tratamiento",
+       fill = "Tratamiento") +
+  theme_bw()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 ---
-title: "."
+title: "index"
 ---
 :::::: {style="text-align: center;"}
 ## UNIVERSIDAD NACIONAL TORIBIO RODRÍGUEZ DE MENDOZA DE AMAZONAS
@@ -20,13 +20,13 @@ Evaluación del proceso germinativo en semillas de tamarindo (Tamarindus indica)
 
 <br>
 
-| Integrante                      | \% de participación |
-|---------------------------------|---------------------|
-| Huaman Rimarachin Milver        | %                |
-| Neyra Alarcon Shirley Milagros  | %                |
-| Rivera Jimenez Yanet            | %                |
-| Sanchez Alvarado Ruben          | %                |
-| Visalot Chapa Jhener Ivan       | %                |
+| Integrante                      | 
+|---------------------------------|
+| Huaman Rimarachin Milver        |
+| Neyra Alarcon Shirley Milagros  |
+| Rivera Jimenez Yanet            |  
+| Sanchez Alvarado Ruben          | 
+| Visalot Chapa Jhener Ivan       |   
 
 ::: {style="width: 60%; margin: auto; background-color: #f3f3f3; padding: 20px; border-radius: 12px; text-align: center; font-size: 18px;"}
 :::
