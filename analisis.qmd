@@ -1,6 +1,5 @@
 ---
 title: "Análisis de datos"
-format: html
 ---
 
 # Project Setup

@@ -1,6 +1,5 @@
 ---
 title: "Referencias"
-format: html
 ---
 
 Chaodumrikul, S., Kaewsorn, P., Chulaka, P., & Chanprasert, W. (2016). Ruptura de la latencia de las semillas de lufa lisa ( Luffa cylindrica (L.) M. Roem.) mediante escarificación y tratamiento con calor seco. Agriculture and Natural Resources, 50(2), 85-88. https://doi.org/10.1016/j.anres.2015.09.003

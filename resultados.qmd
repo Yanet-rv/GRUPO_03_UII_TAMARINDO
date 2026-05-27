@@ -1,6 +1,5 @@
 ---
 title: "Resultados y discusiones"
-format: html
 ---
 
 ## Resultados

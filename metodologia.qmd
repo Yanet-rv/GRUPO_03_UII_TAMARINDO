@@ -1,9 +1,5 @@
 ---
 title: "Materiales y Métodos"
-format: html
-editor: 
-  markdown: 
-    wrap: sentence
 ---
 
 ## Materiales
