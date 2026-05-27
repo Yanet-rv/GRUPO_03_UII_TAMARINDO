@@ -1,199 +1,223 @@
 ---
 title: "Análisis de datos"
 ---
-
-# Project Setup
-
-```{r}
-#| label:  setup
-
-source('https://inkaverse.com/setup.r')
-```
-
-Factor : Escarificacion
-
-*Variables*
-
-| Variable                      | Abreviatura | Unidades | 
-|-------------------------------|-------------|----------|
-| *Semillas germinadas*         | grs         | conteo   | 
-| *Germinabilidad*              | grp         | \%       | 
-| *Tiempo medio de germinación* | mgt         | tiempo   | 
-| *Índice de sincronización*    | syn         | —        | 
-
-# Cargar librerias
+# Cargar librerías
 
 ```{r}
+
+source("https://inkaverse.com/setup.r")
+
 library(GerminaR)
-library(tidyverse)
-library(googlesheets4)
-library(knitr)
+library(dplyr)
 library(ggplot2)
+library(GerminaR)
+library(knitr)
+
 ```
 
-# Data import
+# Cargar datos
 
 ```{r}
-gs <- "https://docs.google.com/spreadsheets/d/1DxRhmFtBscdZkNRlOHaP2ZLf2yYz6IKwg1cF9elXY84/edit?gid=1390923633#gid=1390923633" %>% 
-  as_sheets_id()
+gs <- ("https://docs.google.com/spreadsheets/d/1DxRhmFtBscdZkNRlOHaP2ZLf2yYz6IKwg1cF9elXY84/edit?gid=1390923633#gid=1390923633") %>% 
+  as_sheets_id(url)
 
 fb <- gs %>% 
-  range_read(ss = .,sheet = "fb")
+  range_read("fb") %>%
+  mutate(
+    Escarificacion = factor(
+      Escarificacion,
+      levels = unique(gsm$Escarificacion)
+    ),
+    qrcode = as.character(qrcode),
+    plots = as.integer(plots),
+    seeds = as.integer(seeds),
+    across(1:cols, ~as.factor(.)),
+    qrcode = as.character(qrcode),
+    plots = as.integer(plots),
+    seeds = as.integer(seeds),
+
+  ) %>%
+  as.data.frame()
+str(fb)
+
 ```
 
-
-# ÍNDICES DE GERMINACIÓN
+# Resumen de germinación
 
 ```{r}
+
 gsm <- ger_summary(
-  factors = c("rows", "Escarificacion"),
-  SeedN = "seeds",
-  evalName = "ger_",
-  cumulative = TRUE,
-  data = fb
-)
-gsm %>% 
-  head(10) %>% 
-  mutate(across(where(is.numeric), ~round(., 2))) %>% 
-  kable(caption = "Índices de germinación")
+                   factors = c("Escarificacion"),
+                   SeedN = "seeds",
+                   evalName = "ger_",
+                   cumulative = TRUE,
+                   data = fb)
+
+gsm %>% kable()
+
 ```
 
-## Semillas germinadas (grs)
+# Objetivo específico 1
 
-- Modelo
+## Porcentaje de germinación (grp)
 
-$$ grs = \mu + block + escarificacion + e$$
-
--ANOVA
-
+### ANOVA de grp.
 
 ```{r}
-library(lme4)
 
-md <- lmer(
-  grs ~ Escarificacion + (1|rows),
-  data = gsm
-)
-anova(md)
-library(car)
-Anova(md)
-summary(md)
+av <- aov(grp ~ Escarificacion + block, data = gsm)
+
+anova(av)
+
 ```
 
-# Comparación de medias
+### Prueba de comparación de medias por cada factor
 
 ```{r}
-library(emmeans)
 
-emm <- emmeans(md, ~ Escarificacion)
-
-pairs(emm, adjust = "tukey")
-```
-
-
-# Letras de significancia
-
-```{r}
-library(multcomp)
-
-letras <- cld(
-  emm,
-  adjust = "tukey",
-  Letters = letters
+mc_grp <- ger_testcomp(
+  aov = av,
+  comp = c("Escarificacion"),
+  type = "snk"
 )
 
-letras
-
 ```
 
-# Gráfico de barras de porcentaje de germinación
-
+### Tabla de resultados
 
 ```{r}
-library(dplyr)
-library(ggplot2)
 
-gsm %>%
-  group_by(Escarificacion) %>%
-  summarise(
-    mean_grp = mean(grp, na.rm = TRUE),
-    sd_grp = sd(grp, na.rm = TRUE),
-    n = n()
-  ) %>%
-  mutate(se_grp = sd_grp / sqrt(n)) %>%
-  ggplot(aes(x = Escarificacion, y = mean_grp, fill = Escarificacion)) +
-  geom_col(position = "dodge", width = 0.5) +
-  geom_errorbar(aes(ymin = mean_grp - se_grp, ymax = mean_grp + se_grp), width = 0.2, color = "black") +
-  scale_fill_brewer(palette = "Set2") +
-  labs(title = ("Germinación (%grp) en semillas de Tamarindo"),
-       y = "Porcentaje de Germinación (grp)",
-       x = "Tratamiento",
-       fill = "Tratamiento") +
-  theme_bw()
+mc_grp$table %>%
+  kable(caption = "Comparación de medias del porcentaje de germinación (GRP)")
+
 ```
 
-## Tiempo medio de germinación 
+### Gráfico de barras de porcentage de germinación
 
 ```{r}
-library(dplyr)
-library(ggplot2)
 
-gsm %>%
-  group_by(Escarificacion) %>%
-  summarise(
-    mean_mgt = mean(mgt, na.rm = TRUE),
-    sd_mgt = sd(mgt, na.rm = TRUE),
-    n = n()
-  ) %>%
-  mutate(se_mgt = sd_mgt / sqrt(n)) %>%
-  ggplot(aes(x = Escarificacion, y = mean_mgt, fill = Escarificacion)) +
-  geom_col(position = "dodge", width = 0.5) +
-  geom_errorbar(aes(ymin = mean_mgt - se_mgt, ymax = mean_mgt + se_mgt), width = 0.2, color = "black") +
-  scale_fill_brewer(palette = "Set2") +
-  labs(title = ("Tiempo Medio de Germinación en semillas de Tamarindo"),
-       y = "Tiempo Medio de Germinación (mgt)",
-       x = "Tratamiento",
-       fill = "Tratamiento") +
-  theme_bw()
+grp <- mc_grp$table %>% 
+  fplot(data = .,
+        type = "bar",
+        x = "Escarificacion",         # eje X: variedad
+        y = "grp",              # variable a graficar
+        group = NULL,
+        ylimits = c(0, 120, 20),
+        ylab = "Germinación ('%')",   # <- evitar % y tildes
+        xlab = "Escarificacion",
+        error = "ste",
+        sig = "sig",
+        color = TRUE
+  )
+grp
+
 ```
 
 
-## Índice de sincronización 
+## Tiempo medio de germinación (mgt)
 
+### ANOVA para mgt
 
 ```{r}
-library(dplyr)
-library(ggplot2)
 
-gsm %>%
-  group_by(Escarificacion) %>%
-  summarise(
-    mean_syn = mean(syn, na.rm = TRUE),
-    sd_syn = sd(syn, na.rm = TRUE),
-    n = n()
-  ) %>%
-  mutate(se_syn = sd_syn / sqrt(n)) %>%
-  ggplot(aes(x = Escarificacion, y = mean_syn, fill = Escarificacion)) +
-  geom_col(position = "dodge", width = 0.5) +
-  geom_errorbar(aes(ymin = mean_syn - se_syn, ymax = mean_syn + se_syn), width = 0.2, color = "black") +
-  scale_fill_brewer(palette = "Set1") +
-  labs(title =       ("Índice de Sincronización (syn)"),
-       y = "Índice de Sincronización",
-       x = "Tratamiento",
-       fill = "Tratamiento") +
-  theme_bw()
-```
+av_mgt <- aov(mgt ~ Escarificacion + block, data = gsm)
+
+anova(av_mgt)
 
 ```
 
+### Comparación de medias
+
+```{r}
+
+mc_mgt <- ger_testcomp(
+  aov = av_mgt,
+  comp = c("Escarificacion"),
+  type = "snk"
+)
 
 
+```
 
+### Tabla de resultados
 
+```{r}
 
+mc_mgt$table %>%
+  kable(caption = "Comparación de medias del tiempo medio de germinación (MGT)")
 
+```
 
+### Gráfico de barras
 
+```{r}
+mgt_plot <- mc_mgt$table %>%
+  fplot(data = .,
+        type = "bar",
+        x = "Escarificacion",
+        y = "mgt",
+        group = NULL,
+        ylimits = c(0, max(.$mgt + .$ste, na.rm = TRUE) * 1.2, 1),
+        ylab = "Tiempo medio de germinación (días)",
+        xlab = "Escarificacion",
+        error = "ste",
+        sig = "sig",
+        color = TRUE)
 
+mgt_plot
 
+```
 
+## Índice de sincronización (syn)
+
+### ANOVA para syn
+
+```{r}
+
+av_syn <- aov(syn ~ Escarificacion + block, data = gsm)
+
+anova(av_syn)
+
+```
+
+### Comparación de medias
+
+```{r}
+
+mc_syn <- ger_testcomp(
+  aov = av_syn,
+  comp = c("Escarificacion"),
+  type = "snk"
+)
+
+```
+
+### Tabla de resultados
+
+```{r}
+
+mc_syn$table %>%
+  kable(caption = "Comparación de medias del índice de sincronización (SYN)")
+
+```
+
+### Gráfico de barras
+
+```{r}
+
+syn_plot <- mc_syn$table %>%
+  fplot(data = .,
+        type = "bar",
+        x = "Escarificacion",
+        y = "syn",
+        group = NULL,
+        ylimits = c(0, max(.$syn + .$ste, na.rm = TRUE) * 1.2, 0.1),
+        ylab = "Índice de sincronización",
+        xlab = "Escarificacion",
+        error = "ste",
+        sig = "sig",
+        color = TRUE)
+
+syn_plot
+
+```
