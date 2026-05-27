@@ -127,7 +127,7 @@ gsm %>%
   geom_errorbar(aes(ymin = mean_grp - se_grp, ymax = mean_grp + se_grp), width = 0.2, color = "black") +
   scale_fill_brewer(palette = "Set2") +
   labs(title = ("Germinación (%grp) en semillas de Tamarindo"),
-       y = "Porcentaje de Germinación (%grp)",
+       y = "Porcentaje de Germinación (grp)",
        x = "Tratamiento",
        fill = "Tratamiento") +
   theme_bw()
