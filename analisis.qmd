@@ -1,6 +1,7 @@
 ---
 title: "Análisis de datos"
 ---
+
 # Cargar librerías
 
 ```{r}
@@ -18,26 +19,21 @@ library(knitr)
 # Cargar datos
 
 ```{r}
+
 gs <- ("https://docs.google.com/spreadsheets/d/1DxRhmFtBscdZkNRlOHaP2ZLf2yYz6IKwg1cF9elXY84/edit?gid=1390923633#gid=1390923633") %>% 
   as_sheets_id(url)
 
 fb <- gs %>% 
   range_read("fb") %>%
   mutate(
-    Escarificacion = factor(
-      Escarificacion,
-      levels = unique(gsm$Escarificacion)
-    ),
     qrcode = as.character(qrcode),
     plots = as.integer(plots),
     seeds = as.integer(seeds),
     across(1:cols, ~as.factor(.)),
-    qrcode = as.character(qrcode),
-    plots = as.integer(plots),
-    seeds = as.integer(seeds),
 
   ) %>%
   as.data.frame()
+
 str(fb)
 
 ```
@@ -151,6 +147,7 @@ mc_mgt$table %>%
 ### Gráfico de barras
 
 ```{r}
+
 mgt_plot <- mc_mgt$table %>%
   fplot(data = .,
         type = "bar",
