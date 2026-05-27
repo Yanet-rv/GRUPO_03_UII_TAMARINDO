@@ -1,7 +1,8 @@
 ---
 title: "index"
 ---
-:::::: {style="text-align: center;"}
+
+:::::::: {style="text-align: center;"}
 ## UNIVERSIDAD NACIONAL TORIBIO RODRÍGUEZ DE MENDOZA DE AMAZONAS
 
 ![](https://upload.wikimedia.org/wikipedia/commons/9/95/Logo-2016-solo-ok.png){width="4.8cm"}
@@ -10,7 +11,7 @@ title: "index"
 
 ESCUELA PROFESIONAL DE INGENIERÍA AGRÓNOMA
 
-Evaluación del proceso germinativo en semillas de tamarindo (Tamarindus indica) mediante métodos de escarificación
+Evaluación del proceso germinativo en semillas de tamarindo (*Tamarindus indica*) mediante métodos de escarificación
 
 <br>
 
@@ -20,13 +21,13 @@ Evaluación del proceso germinativo en semillas de tamarindo (Tamarindus indica)
 
 <br>
 
-| Integrante                      | 
-|---------------------------------|
-| Huaman Rimarachin Milver        |
-| Neyra Alarcon Shirley Milagros  |
-| Rivera Jimenez Yanet            |  
-| Sanchez Alvarado Ruben          | 
-| Visalot Chapa Jhener Ivan       |   
+| Integrante                     |
+|--------------------------------|
+| Huaman Rimarachin Milver       |
+| Neyra Alarcon Shirley Milagros |
+| Rivera Jimenez Yanet           |
+| Sanchez Alvarado Ruben         |
+| Visalot Chapa Jhener Ivan      |
 
 ::: {style="width: 60%; margin: auto; background-color: #f3f3f3; padding: 20px; border-radius: 12px; text-align: center; font-size: 18px;"}
 :::
@@ -53,18 +54,17 @@ Producción y Tecnología de Semillas
 
 ------------------------------------------------------------------------
 
-## Resumen 
+## Resumen
 
 ::: {style="text-align: justify;"}
+Mediante el desarrollo del experimento se tuvo como finalidad evaluar el proceso germinativo en semillas de tamarindo (Tamarindus indica) mediante métodos de escarificación. Para ello, se empleó un Diseño Completamente al Azar (DCA) con cuatro tratamientos y cuatro repeticiones .
 
+Los tratamientos evaluados fueron: T0: Control (sin escarificación), T1: Mecánica : Lijado superficial del tegumento, T2:Térmica (inmersión en agua caliente) y T3:Corte mecánico (incisión con bisturí).
 
-Mediante el desarrollo del experimento se tuvo como finalidad evaluar el proceso germinativo en semillas de tamarindo (Tamarindus indica) mediante métodos de escarificación. Para ello, se empleó un Diseño de Bloques Completamente al Azar (DBCA) con cuatro tratamientos y cuatro repeticiones .
+Cada unidad experimental estuvo constituida por 25 semillas,registrándose diariamente el número de semillas germinadas durante el periodo de evaluación de once días.
+:::
 
-Los tratamientos evaluados fueron: T0: Control (sin escarificación), T1: Mecánica :  Lijado superficial del tegumento, T2:Térmica (inmersión en agua caliente) y T3:Corte mecánico (incisión con bisturí).
-
-Cada unidad experimental estuvo constituida por 25 semillas,registrándose diariamente el número de semillas germinadas durante el periodo de evaluación.
-
-![](images/03.jfif){width="584"}
+::: {style="text-align: justify;"}
 
 ------------------------------------------------------------------------
 
@@ -77,3 +77,5 @@ Cada unidad experimental estuvo constituida por 25 semillas,registrándose diari
 ## Etiquetas
 
 <https://drive.google.com/file/d/1y0ljjqbug18bJOdPyJ8jIsNkPSbCv5sc/view?usp=sharing>.
+:::
+::::::::

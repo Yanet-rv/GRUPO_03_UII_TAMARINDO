@@ -308,8 +308,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#materiales" id="toc-materiales" class="nav-link active" data-scroll-target="#materiales">Materiales</a>
   <ul class="collapse">
   <li><a href="#material-vegetal" id="toc-material-vegetal" class="nav-link" data-scroll-target="#material-vegetal">Material vegetal</a></li>
+  <li><a href="#materiales-e-instrumentos" id="toc-materiales-e-instrumentos" class="nav-link" data-scroll-target="#materiales-e-instrumentos">Materiales e instrumentos</a></li>
   </ul></li>
-  <li><a href="#métodos" id="toc-métodos" class="nav-link" data-scroll-target="#métodos">Métodos</a></li>
+  <li><a href="#métodología" id="toc-métodología" class="nav-link" data-scroll-target="#métodología">Métodología</a>
+  <ul class="collapse">
+  <li><a href="#elaboración-de-libro-de-campo-y-etiquetas" id="toc-elaboración-de-libro-de-campo-y-etiquetas" class="nav-link" data-scroll-target="#elaboración-de-libro-de-campo-y-etiquetas">Elaboración de libro de campo y etiquetas</a></li>
+  <li><a href="#procedimiento-experimental" id="toc-procedimiento-experimental" class="nav-link" data-scroll-target="#procedimiento-experimental">Procedimiento experimental</a></li>
+  <li><a href="#diseño-del-experimento" id="toc-diseño-del-experimento" class="nav-link" data-scroll-target="#diseño-del-experimento">Diseño del experimento</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -340,16 +346,60 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="materiales">Materiales</h2>
 <section id="material-vegetal" class="level3">
 <h3 class="anchored" data-anchor-id="material-vegetal">Material vegetal</h3>
-<p>Las semillas utilizadas corresponden a frutos de tamarindo seleccionados por su buen estado de madurez y apariencia saludable. Estas fueron adquiridas en el Mercado Modelo de la ciudad de Chachapoyas, región Amazonas. Posteriormente, se realizó una selección manual de las semillas, descartando aquellas que presentaban daños físicos, manchas, perforaciones, signos de deterioro o impurezas. Solo se consideraron las semillas con mayor integridad física, uniformidad y apariencia vigorosa para su utilización en el proceso experimental.</p>
+<p>Las semillas utilizadas corresponden a frutos de tamarindo seleccionados por su buen estado de madurez y apariencia saludable. Estas fueron adquiridas en el mercado modelo de la ciudad de Chachapoyas, región Amazonas. Posteriormente, se realizó una selección manual de las semillas, descartando aquellas que presentaban daños físicos, manchas, perforaciones, signos de deterioro o impurezas. Solo se consideraron las semillas con mayor integridad física, uniformidad y apariencia vigorosa para su utilización en el proceso experimental.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/TAMARIN.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="280"></p>
+</figure>
+</div>
+<p><strong>Figura 1</strong>. Semillas de Tamarindo (*<em>Tamarindus indica</em>*)</p>
+</section>
+<section id="materiales-e-instrumentos" class="level3">
+<h3 class="anchored" data-anchor-id="materiales-e-instrumentos">Materiales e instrumentos</h3>
+<p>Para la ejecución del trabajo se utiliza papel tolla, bisturí, agua, cinta scotch, ligas, guantes, jarra hervidora y dieseis tapers transparentes de polipropileno esto con la finalidad de realizar el trabajo de manera ordenada, segura y eficiente. Estos materiales nos permitieron la manipulación,el almacenamiento y la protección adecuada de las semillas durante todo el proceso, garantizando limpieza y una mejor organización.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/materiales2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="400"></p>
+</figure>
+</div>
+<p><strong>Figura 2</strong>. Materiales utilizados</p>
 </section>
 </section>
-<section id="métodos" class="level2">
-<h2 class="anchored" data-anchor-id="métodos">Métodos</h2>
-<p>2.2.1. Elaboración de libro de campo</p>
-<p>Mediante la plataforma interactiva Tarpuy, desde el entorno de R, se elaboró el libro de campo para la planificación y organización del experimento en semillas de tamarindo, el cual estuvo constituido por cuatro tratamientos (un testigo y tres métodos de escarificación), con cuatro repeticiones y 25 unidades experimentales por tratamiento. La información experimental fue sistematizada en una hoja de cálculo de Google Sheets e importada a R mediante el paquete googlesheets4 para su procesamiento y gestión. Asimismo, las etiquetas de identificación fueron generadas con el paquete huito de R, incorporando información de los tratamientos e imágenes referenciales, como el logotipo institucional, permitiendo una identificación estandarizada y el adecuado seguimiento de las unidades experimentales durante la fase de germinación.</p>
-<p>2.2.2. Elaboración de etiquetas Selección y limpieza de semillas. Aplicación de tratamientos pregerminativos. Colocación de semillas sobre papel toalla húmedo y/o recipientes Incubación en condiciones controladas. Registro diario de germinación. Evaluación de variables fisiológicas. Variables: Porcentaje de germinación, Tiempo medio de germinación, Velocidad de emergencia-Uniformidad germinativa y longitud de radicula</p>
+<section id="métodología" class="level2">
+<h2 class="anchored" data-anchor-id="métodología">Métodología</h2>
+<section id="elaboración-de-libro-de-campo-y-etiquetas" class="level3">
+<h3 class="anchored" data-anchor-id="elaboración-de-libro-de-campo-y-etiquetas">Elaboración de libro de campo y etiquetas</h3>
+<p>Mediante la plataforma interactiva Tarpuy, desde el entorno de R, se elaboró el libro de campo para la planificación y organización del experimento en semillas de tamarindo, el cual estuvo constituido por cuatro tratamientos: T0: Control (sin escarificación), T1: Mecánica: Lijado superficial del tegumento, T2: Térmica (inmersión en agua caliente) y T3: Corte mecánico (incisión con bisturí). La información experimental fue sistematizada en una hoja de cálculo de Google Sheets e importada a R mediante el paquete googlesheets4 para su procesamiento y gestión. Asimismo, las etiquetas de identificación fueron generadas con el paquete huito de R, incorporando información de los tratamientos e imágenes referenciales, como el logotipo institucional, permitiendo una identificación estandarizada y el adecuado seguimiento de las unidades experimentales durante la fase de germinación.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/etiquetas-01.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Figura 3</strong>. Etiquetas del experimento</p>
+</section>
+<section id="procedimiento-experimental" class="level3">
+<h3 class="anchored" data-anchor-id="procedimiento-experimental">Procedimiento experimental</h3>
+<p>El experimento se realizó en aulas de la universidad Nacional Toribio Rodríguez de Mendoza, en primer lugar, se etiqueto los dieseis tapers, posteriormente se colocó papel toalla en cada uno. Una vez seleccionada la semilla y obtenidos todos los materiales se inició con el desarrollo de cada tratamiento. (Figura 4). Mediante el desarrollo del experimento, para el tratamiento T0: Control, se tomó 100 semillas del cual se realizó cuatro repeticiones de 25 semillas cada uno y se agregó agua con ayuda de una jeringa. Luego para T1: Mecánica, se tomó las semillas de una en una realizando el lijado superficial. En cuanto al T2: Térmica, se utilizó una jarra hervidora de un litro, se calentó el agua hasta lo 100°c, en seguida se dejó reposar el agua por cuatro minutos, luego se con ayuda de un recipiente se colocó las 100 semillas de tamarindo por un tiempo de cinco minutos y para el T3: Corte mecánico, se utilizó cuidadosamente un bisturí realizando un corte de la testa de cada una de las semillas.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/metodologia.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Figura 4</strong><em>.</em> Desarrollo del experimento. &nbsp;<strong>(A)</strong> T0: Control (sin escarificación). <strong>(B)</strong> T1: Mecánica:&nbsp; Lijado superficial del tegumento. <strong>(C)</strong> T2: Térmica (inmersión en agua caliente) y <strong>(D)</strong> T3: Corte mecánico (incisión con bisturí). &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+</p>
+</section>
+<section id="diseño-del-experimento" class="level3">
+<h3 class="anchored" data-anchor-id="diseño-del-experimento">Diseño del experimento</h3>
+<p>La evaluación se realizó utilizando un Diseño Completamente al Azar (DCA), con el propósito de evaluar el efecto de diferentes métodos de escarificación en la germinación de semillas de tamarindo. Para el trabajo se establecieron cuatro tratamientos, conformados por un tratamiento control y tres métodos escarificación, los cuales permitirán comparar la efectividad de cada técnica sobre la capacidad germinativa de las semillas. En cada tratamiento se realizó con cuatro réplicas, a fin de garantizar mayor precisión y confiabilidad en los resultados experimentales. La unidad experimental se constituyó por 25 semillas de tamarindo por repetición, en total se utilizaron 400 semillas de tamarindo, de manera que cada tratamiento será evaluado y registrado bajo condiciones similares por un periodo de11 días, reduciendo así la variabilidad y facilitando el análisis estadístico de los datos obtenidos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/diseño.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><strong>Figura 5.</strong> Distribución de los tratamientos</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -3,23 +3,12 @@ title: "Referencias"
 format: html
 ---
 
-## Quarto
+Chaodumrikul, S., Kaewsorn, P., Chulaka, P., & Chanprasert, W. (2016). Ruptura de la latencia de las semillas de lufa lisa ( Luffa cylindrica (L.) M. Roem.) mediante escarificación y tratamiento con calor seco. Agriculture and Natural Resources, 50(2), 85-88. https://doi.org/10.1016/j.anres.2015.09.003
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Hashem, Md. A., Bithi, E. J., Ahmed, N., Islam, S., & Miem, Md. M. (2025). Adsorción de colorantes de aguas residuales de curtiduría en adsorbente de semillas de Tamarindus indica. Water-Energy Nexus, 8, 45-54. https://doi.org/10.1016/j.wen.2025.03.003
 
-## Running Code
+Kurniawan, S. B., Haya, A. A., Soedarti, T., Kuncoro, E. P., Sługocki, Ł., Nowakowski, K., Abdul, P. M., & Imron, M. F. (2025). Revelando el potencial del extracto de semilla de Tamarindus indica como biocoagulante para el tratamiento de aguas residuales de acuicultura: Efecto del tipo de solvente, concentración, dosis y evaluación de toxicidad. Results in Engineering, 27, 105710. https://doi.org/10.1016/j.rineng.2025.105710
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+Li, Z., Wang, S., Wang, S., Wang, C., Zhang, H., Chen, F., & Wang, W. (2026). El genoma de Tamarindus indica , de telómero a telómero, revela la acumulación de ácido tartárico en el fruto. Plant Diversity, 48(2), 429-432. https://doi.org/10.1016/j.pld.2025.12.011
 
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this 
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
+Parrotta., J. A. (1990). Tamarindus Indica L. (Tamarindo) (SO-ITF-SM-3, 5th ed.). Department of Agriculture, Forest Service, Southern Forest Experiment Station.
