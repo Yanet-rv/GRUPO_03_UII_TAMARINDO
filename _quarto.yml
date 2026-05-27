@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Germinación de Zanahoria"
+  title: "Germinación de tamarindo"
 
   navbar:
     background: "#153768"
@@ -29,7 +29,7 @@ website:
 
     right:
       - icon: github
-        href: https://github.com/7342664321-bot/Escarificaci-n_semillas_soya
+        href: https://github.com/Yanet-rv/GRUPO_03_UII_TAMARINDO.git
         aria-label: GitHub
 
   page-footer:
