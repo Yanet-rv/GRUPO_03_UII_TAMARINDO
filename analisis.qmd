@@ -107,42 +107,31 @@ letras
 
 ```
 
-# Representación grafica
+# Gráfico de barras de porcentaje de germinación
+
 
 ```{r}
 library(dplyr)
+library(ggplot2)
 
-letras_df <- letras %>%
-  as.data.frame() %>%
-  mutate(
-    Escarificacion = factor(
-      Escarificacion,
-      levels = unique(gsm$Escarificacion)
-    ),
-    .group = trimws(.group)
-  )
-plot_smr(
-  letras_df,
-  x = "Escarificacion",
-  y = "emmean",
-  error = "SE",
-  sig = ".group"
-) +
-  ggtitle("Germinación (grp) de semillas de tamarindo") +
-  
-  theme(
-    plot.title = element_text(
-      hjust = 0.5,   # centra el título
-      face = "bold",
-      size = 16
-    )
-  ) +
-  
-  scale_y_continuous(
-    breaks = seq(0, 100, by = 2)
-  )
+gsm %>%
+  group_by(Escarificacion) %>%
+  summarise(
+    mean_grp = mean(grp, na.rm = TRUE),
+    sd_grp = sd(grp, na.rm = TRUE),
+    n = n()
+  ) %>%
+  mutate(se_grp = sd_grp / sqrt(n)) %>%
+  ggplot(aes(x = Escarificacion, y = mean_grp, fill = Escarificacion)) +
+  geom_col(position = "dodge", width = 0.5) +
+  geom_errorbar(aes(ymin = mean_grp - se_grp, ymax = mean_grp + se_grp), width = 0.2, color = "black") +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = ("Germinación (%grp) en semillas de Tamarindo"),
+       y = "Porcentaje de Germinación (%grp)",
+       x = "Tratamiento",
+       fill = "Tratamiento") +
+  theme_bw()
 ```
-
 
 ## Tiempo medio de germinación 
 
@@ -196,20 +185,7 @@ gsm %>%
   theme_bw()
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 

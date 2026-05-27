@@ -3,23 +3,27 @@ title: "Resultados y discusiones"
 format: html
 ---
 
-## Quarto
+## Resultados
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Mediante el presente experimento se evaluó el efecto de diferentes métodos de escarificación sobre la germinación de semillas de (Tamarindus indica) con dormancia física, con el objetivo de analizar su comportamiento germinativo a partir de tres índices clave: el porcentaje de germinación (GRP), el tiempo medio de germinación (MGT) y el índice de sincronización (SYN). Los datos fueron sometidos a un análisis de varianza (ANOVA) y a pruebas de comparación de medias, considerando un nivel de significancia de α = 0.05. A continuación, se presentan los resultados obtenidos.
 
-## Running Code
+### Porcentaje de germinación (GRP)
+Objetivo 1. Evaluar el efecto de los tres métodos de escarificación sobre el porcentaje de germinación de semillas de tamarindo (Tamarindus indica) con dormancia física.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
-```{r}
-1 + 1
-```
 
-You can add options to executable code like this 
 
-```{r}
-#| echo: false
-2 * 2
-```
+### Tiempo medio de germinación (mgt)
+Objetivo 2. Determinar el tiempo medio de germinación y el método más eficiente para romper la dormancia en tamarindo (Tamarindus indica). 
 
-The `echo: false` option disables the printing of code (only output is displayed).
+
+
+
+### Índice de sincronización (syn)
+
+Objetivo 3.  Evaluar el efecto de métodos de escarificación sobre el porcentaje, velocidad e índice de sincronización de la germinación en semillas de Tamarindus indica.
+
+
+
+
+### Interacción entre los tratamientos
