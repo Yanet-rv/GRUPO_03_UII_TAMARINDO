@@ -2,23 +2,12 @@
 title: "Conclusiones"
 ---
 
-## Quarto
+El presente estudio evaluó el efecto de diferentes métodos de escarificación física sobre el comportamiento germinativo de semillas de tamarindo con dormancia física, a través de la medición de parámetros clave como el porcentaje de germinación, el tiempo medio de germinación (MGT) y el índice de sincronización (SYN). Los tratamientos aplicados incluyeron escarificación mecánica (lijado y corte con bisturí), escarificación térmica (inmersión en agua caliente) y un tratamiento control sin escarificación, con el objetivo de determinar la eficacia de cada método para romper la dormancia y promover una germinación más rápida y uniforme. 
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+A continuación, se presentan las conclusiones derivadas de cada uno de los objetivos específicos planteados.
 
-## Running Code
+- **Primer objetivo**: Los métodos de escarificación mecánica (lijado y corte con bisturí) incrementaron significativamente el porcentaje de germinación en comparación con la escarificación térmica y el control, demostrando ser más eficaces para romper la dormancia física de las semillas de tamarindo.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+- **Segundo Objetivo**: El método más eficiente en términos de tiempo medio de germinación fue la escarificación térmica y el corte con bisturí, ambos con un MGT cercano a 8 días. Esto indica que estos métodos no solo aumentan la tasa de germinación, sino que también aceleran el proceso.
 
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this 
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
+- **Tercer Objetivo**: Los métodos de escarificación térmica y el tratamiento control mostraron una mayor uniformidad en la germinación, reflejada en un mayor índice de sincronización. Por otro lado, los tratamientos mecánicos (lijado y corte con bisturí), aunque más efectivos en términos de porcentaje de germinación, presentaron una germinación menos sincronizada, lo que indica una mayor dispersión en el tiempo de emergencia de las plántulas. Esto sugiere que la elección del método de escarificación debe considerar no solo la tasa de germinación, sino también la uniformidad deseada en el proceso.
